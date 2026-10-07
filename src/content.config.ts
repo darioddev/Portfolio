@@ -21,6 +21,7 @@ const localized = (file: string, schema: ZodTypeAny) =>
     schema,
   });
 
+
 export const collections = {
   profileShared: shared('profile', s.profileShared),
   profileText: localized('profile', s.profileText),
