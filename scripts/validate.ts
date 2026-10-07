@@ -178,13 +178,11 @@ const items = <T>(domain: Domain): T[] => (content[domain]?.shared as { items?: 
 
 checkTags('src/data/shared/experience.yaml', items('experience'));
 checkTags('src/data/shared/projects.yaml', items('projects'));
-checkTags('src/data/shared/notes.yaml', items('notes'));
 
 const logoOwners: [string, { id: string; logo?: string; photo?: string }[]][] = [
   ['experience', items('experience')],
   ['education', items('education')],
   ['certifications', items('certifications')],
-  ['testimonials', items('testimonials')],
 ];
 for (const [domain, entries] of logoOwners) {
   for (const entry of entries) {

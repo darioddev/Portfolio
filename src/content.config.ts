@@ -36,8 +36,4 @@ export const collections = {
   skillsText: localized('skills', s.skillsText),
   projectsShared: shared('projects', s.projectsShared),
   projectsText: localized('projects', s.projectsText),
-  testimonialsShared: shared('testimonials', s.testimonialsShared),
-  testimonialsText: localized('testimonials', s.testimonialsText),
-  notesShared: shared('notes', s.notesShared),
-  notesText: localized('notes', s.notesText),
 };

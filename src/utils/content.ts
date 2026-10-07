@@ -45,14 +45,12 @@ export async function getPortfolio(locale: LocaleCode) {
     entry<S.SiteText>('siteText', `${locale}/site`),
   ]);
 
-  const [experience, education, certifications, skills, projects, testimonials, notes] = await Promise.all([
+  const [experience, education, certifications, skills, projects] = await Promise.all([
     merged<S.ExperienceShared, S.ExperienceText>('experience'),
     merged<S.EducationShared, S.EducationText>('education'),
     merged<S.CertificationShared, S.CertificationText>('certifications'),
     merged<S.SkillShared, S.SkillText>('skills'),
     merged<S.ProjectShared, S.ProjectText>('projects'),
-    merged<S.TestimonialShared, S.TestimonialText>('testimonials'),
-    merged<S.NoteShared, S.NoteText>('notes'),
   ]);
 
   const tagLabels = new Map(profileText.tags.map((tag) => [tag.id, tag.label]));
@@ -67,9 +65,7 @@ export async function getPortfolio(locale: LocaleCode) {
     education: newestFirst(education),
     certifications: [...certifications].sort((a, b) => b.issue_date.localeCompare(a.issue_date)),
     skills,
-    projects: [...projects].sort((a, b) => b.date.localeCompare(a.date)),
-    testimonials,
-    notes: [...notes].sort((a, b) => b.date.localeCompare(a.date)),
+    projects: [...projects].sort((a, b) => b.date.localeCompare(a.date))
   };
 }
 

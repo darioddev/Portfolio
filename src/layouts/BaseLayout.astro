@@ -11,7 +11,7 @@ interface Props {
   locale: LocaleCode;
   title: string;
   description: string;
-  ogImage?: string | undefined;
+  ogImage?: string | undefined | null;
   ogImageAlt?: string;
   twitterHandle?: string | undefined;
   defaultTheme?: 'system' | 'light' | 'dark';
@@ -62,14 +62,14 @@ const routes = Object.fromEntries(localeCodes.map((code) => [code, localeUrl(cod
     <!-- Runs before first paint: applies the saved theme and the saved language, so nothing flashes. -->
     <script is:inline define:vars={{ routes, currentLocale: locale, defaultLocale, defaultTheme }}>
       (function () {
-        let root = document.documentElement;
+        const root = document.documentElement;
         root.classList.add('js');
         try {
-          let theme = localStorage.getItem('theme');
+          const theme = localStorage.getItem('theme');
           if (theme === 'light' || theme === 'dark') root.dataset.theme = theme;
           else if (defaultTheme !== 'system') root.dataset.theme = defaultTheme;
 
-          let saved = localStorage.getItem('locale');
+          const saved = localStorage.getItem('locale');
           if (currentLocale === defaultLocale && saved && saved !== defaultLocale && routes[saved]) {
             location.replace(routes[saved] + location.hash);
           }

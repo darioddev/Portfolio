@@ -10,10 +10,8 @@ import Experience from './Experience.astro';
 import Footer from './Footer.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
-import Notes from './Notes.astro';
 import Projects from './Projects.astro';
 import Skills from './Skills.astro';
-import Testimonials from './Testimonials.astro';
 
 interface Props {
   locale: LocaleCode;
@@ -52,10 +50,6 @@ const brand = `${data.profile.first_name} ${data.profile.last_name}`;
             return <Projects locale={locale} kind="project" items={data.projects} />;
           case 'architecture':
             return <Projects locale={locale} kind="architecture" items={data.projects} />;
-          case 'notes':
-            return <Notes locale={locale} items={data.notes} tagLabel={data.tagLabel} />;
-          case 'testimonials':
-            return <Testimonials locale={locale} items={data.testimonials} />;
           case 'contact':
             return <Contact locale={locale} profile={data.profile} />;
         }

@@ -16,14 +16,14 @@ const home = localeUrl(defaultLocale);
   <script is:inline define:vars={{ routes, defaultLocale }}>
     // Send visitors to the home page of the language in the URL, their saved language, or the default one.
     (function () {
-      var target = routes[defaultLocale];
+      const target = routes[defaultLocale];
       try {
-        var prefix = location.pathname.split('/')[1];
-        var saved = localStorage.getItem('locale');
+        const prefix = location.pathname.split('/')[1];
+        const saved = localStorage.getItem('locale');
         if (routes[prefix]) target = routes[prefix];
         else if (saved && routes[saved]) target = routes[saved];
       } catch (error) {
-        /* keep the default */
+        console.error('Error occurred while trying to access localStorage:', error);
       }
       location.replace(target);
     })();
