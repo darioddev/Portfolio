@@ -3,6 +3,7 @@ theme:
   default: system           # system | light | dark
 seo:
   site_url: https://darioddev.github.io
+  base_path: /portfolio/      # path to the root of the site, starting with "/"
   #twitter_handle: "@noreply"
 # Order and visibility of sections. The first enabled section must be "about".
 sections:

@@ -27,6 +27,10 @@
           "type": "string",
           "format": "uri"
         },
+        "base_path": {
+          "type": "string",
+          "pattern": "^\\/[^\\s]*$"
+        },
         "og_image": {
           "type": "string",
           "pattern": "^\\/[^\\s]+$",
@@ -39,6 +43,7 @@
       },
       "required": [
         "site_url",
+        "base_path",
         "og_image"
       ],
       "additionalProperties": false
