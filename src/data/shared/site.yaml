@@ -13,6 +13,4 @@ sections:
   - { id: skills, enabled: true }
   - { id: projects, enabled: false }
   - { id: architecture, enabled: false }
-  - { id: notes, enabled: false }
-  - { id: testimonials, enabled: false }
   - { id: contact, enabled: true }

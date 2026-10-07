@@ -16,8 +16,6 @@ export const sectionIds = [
   'skills',
   'projects',
   'architecture',
-  'notes',
-  'testimonials',
   'contact',
 ] as const;
 export type SectionId = (typeof sectionIds)[number];
@@ -260,17 +258,7 @@ export const projectsText = list(
     .strict(),
 );
 
-/* testimonials ---------------------------------------------------------- */
 
-export const testimonialsShared = list(
-  z.object({ id, author: text, company: text, photo: imagePath.optional() }).strict(),
-).optional();
-export const testimonialsText = list(z.object({ id, quote: text, role: text }).strict()).optional();
-
-/* notes ----------------------------------------------------------------- */
-
-export const notesShared = list(z.object({ id, date: isoDate, url, tags: z.array(id) }).strict()).optional();
-export const notesText = list(z.object({ id, title: text, summary: text }).strict()).optional();
 
 /* registry -------------------------------------------------------------- */
 
@@ -283,8 +271,6 @@ export const registry = {
   certifications: { shared: certificationsShared, text: certificationsText, list: true },
   skills: { shared: skillsShared, text: skillsText, list: true },
   projects: { shared: projectsShared, text: projectsText, list: true },
-  testimonials: { shared: testimonialsShared, text: testimonialsText, list: true },
-  notes: { shared: notesShared, text: notesText, list: true },
 } as const;
 
 export type Domain = keyof typeof registry;
@@ -300,10 +286,6 @@ export type SkillShared = Item<typeof skillsShared>;
 export type SkillText = Item<typeof skillsText>;
 export type ProjectShared = Item<typeof projectsShared>;
 export type ProjectText = Item<typeof projectsText>;
-export type TestimonialShared = Item<typeof testimonialsShared>;
-export type TestimonialText = Item<typeof testimonialsText>;
-export type NoteShared = Item<typeof notesShared>;
-export type NoteText = Item<typeof notesText>;
 export type ProfileShared = z.infer<typeof profileShared>;
 export type ProfileText = z.infer<typeof profileText>;
 export type SiteShared = z.infer<typeof siteShared>;
