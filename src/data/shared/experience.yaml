@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../../schemas/experience.shared.schema.json
+items:
+  - id: api-developer
+    company: Cloudappi
+    company_url: https://example.com/fabrikam
+    logo: images/logos/experience.svg
+    employment_type: full_time
+    start_date: 2024-06
+    current: true
+    tech_stack: [API Owner , API Developer , API Design , AsyncAPI , Seguridad , Cloud]
+    tags: [integration, apis]
+  - id: intern-developer
+    company: Cloudappi
+    company_url: https://example.com/fabrikam
+    logo: images/logos/internship.svg
+    employment_type: full_time
+    start_date: 2024-04
+    end_date: 2024-06
+    tech_stack: [API Design , AsyncAPI , OpenAPI]
+    tags: [integration, apis]
+  - id: intern-it
+    company: Seringe
+    company_url: https://example.com/seringe
+    logo: images/logos/internship.svg
+    employment_type: full_time
+    start_date: 2022-04
+    end_date: 2022-06
+    tech_stack: [Maintenance]
+    tags: [support]

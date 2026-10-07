@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import { t, type LocaleCode, type TranslationKey } from '@/i18n';
+import type { employmentTypes } from '@/schemas';
+import type { Portfolio } from '@/utils/content';
+import { describePeriod } from '@/utils/dates';
+import { resolveImage } from '@/utils/images';
+import Section from './Section.astro';
+
+interface Props {
+  locale: LocaleCode;
+  items: Portfolio['experience'];
+  tagLabel: Portfolio['tagLabel'];
+}
+const { locale, items, tagLabel } = Astro.props;
+
+const employmentKey: Record<(typeof employmentTypes)[number], TranslationKey> = {
+  full_time: 'employment.fullTime',
+  part_time: 'employment.partTime',
+  contract: 'employment.contract',
+  freelance: 'employment.freelance',
+  internship: 'employment.internship',
+};
+const chronological = [...items].reverse();
+---
+
+<Section id="experience" title={t(locale, 'section.experience.title')} intro={t(locale, 'section.experience.intro')}>
+  <p class="mb-2 font-mono text-xs tracking-widest text-soft uppercase">{t(locale, 'experience.progression')}</p>
+  <ol class="progression mb-10" role="list">
+    {chronological.map((role) => <li>{role.position}</li>)}
+  </ol>
+
+  <ol class="route" role="list">
+    {
+      items.map((role, index) => {
+        const period = describePeriod(locale, role);
+        return (
+          <li class="stop" data-current={role.current}>
+            <span class="stop__year" aria-hidden="true">{period.startYear}</span>
+            <span class="stop__node" aria-hidden="true"></span>
+            <details class="card" open={index === 0}>
+              <summary>
+                <Image src={resolveImage(role.logo)} alt="" width={48} height={48} class="logo" />
+                <span class="min-w-0 flex-1">
+                  <span class="block font-display text-xl leading-tight">{role.position}</span>
+                  <span class="block text-soft">
+                    <a href={role.company_url} class="link" rel="noopener noreferrer" target="_blank">{role.company}<span class="sr-only"> {t(locale, 'a11y.externalLink')}</span></a>
+                    · {role.location}
+                  </span>
+                  <span class="mt-1 block text-sm text-soft">
+                    {period.range} · <span class="sr-only">{t(locale, 'common.duration')}: </span>{period.duration} · {t(locale, employmentKey[role.employment_type])}
+                  </span>
+                </span>
+                {role.current && <span class="badge">{t(locale, 'common.current')}</span>}
+                <svg class="chev" viewBox="0 0 12 12" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"></path></svg>
+              </summary>
+              <div class="body">
+                <p>{role.summary}</p>
+                <h3>{t(locale, 'experience.responsibilities')}</h3>
+                <ul>{role.responsibilities.map((item) => <li>{item}</li>)}</ul>
+                {role.achievements.length > 0 && (
+                  <>
+                    <h3>{t(locale, 'experience.achievements')}</h3>
+                    <ul>{role.achievements.map((item) => <li>{item}</li>)}</ul>
+                  </>
+                )}
+                <h3>{t(locale, 'experience.techStack')}</h3>
+                <ul class="chips" role="list">
+                  {role.tech_stack.map((tech) => <li class="chip chip-mono">{tech}</li>)}
+                </ul>
+                {role.tags.length > 0 && (
+                  <ul class="chips mt-3" role="list">
+                    {role.tags.map((id) => <li class="text-sm text-accent">#{tagLabel(id)}</li>)}
+                  </ul>
+                )}
+              </div>
+            </details>
+          </li>
+        );
+      })
+    }
+  </ol>
+</Section>
+
+<style>
+  .progression {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    font-size: 0.88rem;
+  }
+  .progression li + li::before {
+    content: '→';
+    margin-inline: 0.6rem;
+    color: var(--accent);
+  }
+  .route {
+    --rail: 2.25rem;
+    --gutter: 1.65rem;
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    padding-left: var(--rail);
+  }
+  .route::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--rail) - var(--gutter) - 1px);
+    top: 1rem;
+    bottom: 1rem;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--soft) 0 8px, transparent 8px 14px);
+    opacity: 0.55;
+  }
+  .stop {
+    position: relative;
+  }
+  .stop__node {
+    position: absolute;
+    left: calc(var(--gutter) * -1 - 0.55rem + 1px);
+    top: 1.45rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--paper);
+  }
+  .stop[data-current='true'] .stop__node {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--accent);
+  }
+  .stop__year {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .route {
+      --rail: 9rem;
+    }
+    .stop__year {
+      display: block;
+      position: absolute;
+      left: calc(var(--rail) * -1);
+      width: calc(var(--rail) - var(--gutter) - 1.2rem);
+      top: 1.35rem;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1;
+      color: var(--soft);
+    }
+  }
+  summary {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .logo {
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .chev {
+    flex: none;
+    margin-top: 0.4rem;
+    color: var(--soft);
+  }
+  details[open] .chev {
+    transform: rotate(180deg);
+  }
+  .body {
+    padding: 0 1.25rem 1.4rem 5.25rem;
+  }
+  .body h3 {
+    margin-top: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+  .body ul:not(.chips) {
+    margin-top: 0.4rem;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+  .body li::marker {
+    color: var(--accent);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 640px) {
+    .body {
+      padding-left: 1.25rem;
+    }
+  }
+</style>

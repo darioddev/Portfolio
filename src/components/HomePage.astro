@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { LocaleCode } from '@/i18n';
+import { getPortfolio } from '@/utils/content';
+import Certifications from './Certifications.astro';
+import Contact from './Contact.astro';
+import CvDownload from './CvDownload.astro';
+import Education from './Education.astro';
+import Experience from './Experience.astro';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Notes from './Notes.astro';
+import Projects from './Projects.astro';
+import Skills from './Skills.astro';
+import Testimonials from './Testimonials.astro';
+
+interface Props {
+  locale: LocaleCode;
+}
+const { locale } = Astro.props;
+const data = await getPortfolio(locale);
+const enabled = data.site.sections.filter((section) => section.enabled).map((section) => section.id);
+const brand = `${data.profile.first_name} ${data.profile.last_name}`;
+---
+
+<BaseLayout
+  locale={locale}
+  title={data.site.title}
+  description={data.site.description}
+  ogImage={data.site.seo.og_image}
+  ogImageAlt={data.site.og_image_alt}
+  twitterHandle={data.site.seo.twitter_handle}
+  defaultTheme={data.site.theme.default}
+>
+  <Header locale={locale} sections={enabled} />
+  <main id="main">
+    {
+      enabled.map((id) => {
+        switch (id) {
+          case 'about':
+            return <Hero locale={locale} profile={data.profile} tagLabel={data.tagLabel} contactId={enabled.includes('contact') ? 'contact' : undefined} />;
+          case 'experience':
+            return <Experience locale={locale} items={data.experience} tagLabel={data.tagLabel} />;
+          case 'education':
+            return <Education locale={locale} items={data.education} />;
+          case 'certifications':
+            return <Certifications locale={locale} items={data.certifications} />;
+          case 'skills':
+            return <Skills locale={locale} groups={data.skills} />;
+          case 'projects':
+            return <Projects locale={locale} kind="project" items={data.projects} />;
+          case 'architecture':
+            return <Projects locale={locale} kind="architecture" items={data.projects} />;
+          case 'notes':
+            return <Notes locale={locale} items={data.notes} tagLabel={data.tagLabel} />;
+          case 'testimonials':
+            return <Testimonials locale={locale} items={data.testimonials} />;
+          case 'contact':
+            return <Contact locale={locale} profile={data.profile} />;
+        }
+      })
+    }
+    <CvDownload locale={locale} href={data.profile.cv} />
+  </main>
+  <Footer locale={locale} name={brand} />
+</BaseLayout>

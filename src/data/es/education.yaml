@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../../schemas/education.text.schema.json
+items:
+  - id: grado-universitario-informatica
+    degree: Grado universitario
+    field: Ingeniería informática
+    location: Madrid, España
+    description: Estudiante de ingeniería informática en la Universidad Nacional de Educación a Distancia (UNED).
+    highlights: []
+  - id: grado-superior-desarrollo-aplicaciones-web
+    degree: Grado superior
+    field: Desarrollo de aplicaciones web
+    location: Madrid, España
+    description: Formación en desarrollo de aplicaciones web, con conocimientos en programación, bases de datos y comunicaciones.
+    highlights: []
+  - id: grado-medio-sistemas-informaticos
+    degree: Grado medio
+    field: Sistemas microinformáticos y redes
+    location: Madrid, España
+    description: Tecnico en sistemas microinformáticos y redes, con formación en administración de sistemas y redes.
+    highlights: []

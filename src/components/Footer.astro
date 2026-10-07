@@ -1,0 +1,15 @@
+---
+import { t, type LocaleCode } from '@/i18n';
+interface Props {
+  locale: LocaleCode;
+  name: string;
+}
+const { locale, name } = Astro.props;
+---
+
+<footer class="border-t-2 border-line py-8 text-sm text-soft">
+  <div class="wrap flex flex-wrap items-center justify-between gap-3">
+    <p>{t(locale, 'footer.rights', { year: new Date().getFullYear(), name })}</p>
+    <a class="link" href="#about">{t(locale, 'footer.backToTop')}</a>
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "profile (text)",
+  "type": "object",
+  "properties": {
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bio": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "photo_alt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "availability_text": {
+      "type": "string",
+      "minLength": 1,
+      "nullable": true,
+      "default": null
+    },
+    "cta_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "label"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "headline",
+    "summary",
+    "bio",
+    "location",
+    "photo_alt",
+    "cta_label",
+    "tags"
+  ],
+  "additionalProperties": false
+}

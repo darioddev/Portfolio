@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { t, type LocaleCode } from '@/i18n';
+import type { Portfolio } from '@/utils/content';
+import { describePeriod } from '@/utils/dates';
+import { resolveImage } from '@/utils/images';
+import Section from './Section.astro';
+
+interface Props {
+  locale: LocaleCode;
+  items: Portfolio['education'];
+}
+const { locale, items } = Astro.props;
+---
+
+<Section id="education" title={t(locale, 'section.education.title')} intro={t(locale, 'section.education.intro')}>
+  <ul class="grid gap-5" role="list">
+    {
+      items.map((item) => {
+        const period = describePeriod(locale, item);
+        return (
+          <li class="card flex gap-4 p-5">
+            <Image src={resolveImage(item.logo)} alt="" width={48} height={48} class="h-12 w-12 flex-none rounded-md border border-line" />
+            <div class="min-w-0 flex-1">
+              <h3 class="text-xl">{item.degree} · {item.field}</h3>
+              <p class="text-soft">{item.institution} · {item.location}</p>
+              <p class="text-sm">
+                {period.range}
+                {item.current && <span class="sr-only"> · {t(locale, 'education.inProgress')}</span>}
+              </p>
+              <p class="mt-3">{item.description}</p>
+              {item.highlights.length > 0 && (
+                <>
+                  <p class="mt-3 font-mono text-xs tracking-widest text-soft uppercase">{t(locale, 'education.highlights')}</p>
+                  <ul class="mt-1 list-disc pl-5">{item.highlights.map((text) => <li>{text}</li>)}</ul>
+                </>
+              )}
+            </div>
+            {item.current && <span class="badge">{t(locale, 'education.inProgress')}</span>}
+          </li>
+        );
+      })
+    }
+  </ul>
+</Section>

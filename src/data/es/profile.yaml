@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../../schemas/profile.text.schema.json
+headline: Desarrollador de APIs, integración y cloud
+summary: Conecto sistemas que no estaban pensados para hablar entre sí, con APIs claras y flujos que se pueden operar.
+bio:
+  - Soy desarrollador de APIs especializado en integraciones y middleware. Gestionando el ciclo de vidas de apis desde su diseño, implementación y despliegue hasta su deprecación.
+  - Mi enfoque principal son las buenas practicas y diseño de apis al igual que seguir las buenas practicas de integración y desarollo de software. Esto incluye la idempotencia, los reintentos, la observabilidad y la documentación.
+  - Actualmente estoy interesado en el mundo Cloud e IA , y en como poder mejorar mis habilidades y conocimientos en estas áreas para poder aplicarlas en mis proyectos.
+location: Madrid, España
+photo_alt: Retrato de Dario Quinde sonriendo, con fondo cálido de color arena
+#availability_text: Disponible para nuevos proyectos y colaboraciones. Si estás buscando un desarrollador de APIs e integraciones con experiencia en middleware y Azure, no dudes en contactarme. Estoy abierto a oportunidades de trabajo remoto o presencial, y siempre estoy dispuesto a aprender y crecer en mi carrera profesional.
+cta_label: Hablemos
+tags:
+  - { id: cloud, label: Cloud }
+  - { id: apis, label: APIs }
+  - { id: architecture, label: Arquitectura }
+  - { id: azure, label: Azure }
+  - { id: integration, label: Integraciones }
+  - { id: middleware, label: Middleware }

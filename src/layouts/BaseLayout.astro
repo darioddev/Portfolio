@@ -1,0 +1,89 @@
+---
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@/styles/global.css';
+import { absoluteLocaleUrl, defaultLocale, localeCodes, localeUrl, t, type LocaleCode } from '@/i18n';
+
+interface Props {
+  locale: LocaleCode;
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  twitterHandle?: string | undefined;
+  defaultTheme?: 'system' | 'light' | 'dark';
+  noindex?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  ogImage,
+  ogImageAlt,
+  twitterHandle,
+  defaultTheme = 'system',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const image = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+const routes = Object.fromEntries(localeCodes.map((code) => [code, localeUrl(code)]));
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    {localeCodes.map((code) => <link rel="alternate" hreflang={code} href={absoluteLocaleUrl(code)} />)}
+    <link rel="alternate" hreflang="x-default" href={absoluteLocaleUrl(defaultLocale)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t(locale, 'meta.ogLocale')} />
+    {localeCodes.filter((code) => code !== locale).map((code) => <meta property="og:locale:alternate" content={t(code, 'meta.ogLocale')} />)}
+    {image && <meta property="og:image" content={image} />}
+    {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+
+    <!-- Runs before first paint: applies the saved theme and the saved language, so nothing flashes. -->
+    <script is:inline define:vars={{ routes, currentLocale: locale, defaultLocale, defaultTheme }}>
+      (function () {
+        let root = document.documentElement;
+        root.classList.add('js');
+        try {
+          let theme = localStorage.getItem('theme');
+          if (theme === 'light' || theme === 'dark') root.dataset.theme = theme;
+          else if (defaultTheme !== 'system') root.dataset.theme = defaultTheme;
+
+          let saved = localStorage.getItem('locale');
+          if (currentLocale === defaultLocale && saved && saved !== defaultLocale && routes[saved]) {
+            location.replace(routes[saved] + location.hash);
+          }
+        } catch (error) {
+          console.error('Error occurred while trying to access localStorage:', error);
+        }
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/ui';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../../schemas/education.shared.schema.json
+items:
+  - id: grado-universitario-informatica
+    institution: Univerdidad Nacional de Educación a Distancia (UNED)
+    logo: images/logos/universidad.svg
+    start_date: 2026-01
+    current: true
+  - id: grado-superior-desarrollo-aplicaciones-web
+    institution: IES Villaverde
+    logo: images/logos/universidad.svg
+    start_date: 2022-09
+    end_date: 2024-06
+  - id: grado-medio-sistemas-informaticos
+    institution: IES Villaverde
+    logo: images/logos/universidad.svg
+    start_date: 2020-09
+    end_date: 2022-06

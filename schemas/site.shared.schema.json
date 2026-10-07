@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "site (shared)",
+  "type": "object",
+  "properties": {
+    "theme": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": [
+            "system",
+            "light",
+            "dark"
+          ]
+        }
+      },
+      "required": [
+        "default"
+      ],
+      "additionalProperties": false
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "site_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "og_image": {
+          "type": "string",
+          "pattern": "^\\/[^\\s]+$"
+        },
+        "twitter_handle": {
+          "type": "string",
+          "pattern": "^@\\w+$"
+        }
+      },
+      "required": [
+        "site_url",
+        "og_image"
+      ],
+      "additionalProperties": false
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "about",
+              "experience",
+              "education",
+              "certifications",
+              "skills",
+              "projects",
+              "architecture",
+              "notes",
+              "testimonials",
+              "contact"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "enabled"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "theme",
+    "seo",
+    "sections"
+  ],
+  "additionalProperties": false
+}

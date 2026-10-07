@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../../schemas/profile.shared.schema.json
+first_name: Darío Alexander
+last_name: Quinde Quiñonez
+email: dario.alexanderqqz@gmail.com
+photo: images/profile/photo.jpeg   # file lives in src/assets/images/profile/
+availability: closed          # open | limited | closed
+cv:
+  es: /cv/cv-es.pdf         # one entry per locale; missing locales fall back to the default
+tags: [cloud, apis, architecture, azure, integration, middleware]
+links:
+  - id: github
+    kind: github
+    label: GitHub
+    url: https://github.com/darioddev
+  - id: linkedin
+    kind: linkedin
+    label: LinkedIn
+    url: https://www.linkedin.com/in/darío-quinde-quiñonez-9668a030a

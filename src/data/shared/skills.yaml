@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../../schemas/skills.shared.schema.json
+items:
+  - id: apis
+    skills: [REST, OpenAPI, AsyncAPI, OAuth 2.0 and OIDC, Authentication, Authorization, API design, Integrations]
+  - id: cloud
+    skills: [Azure, Observability, Monitoring, Microsoft Entra ID]
+  - id: ia
+    skills: [MCP Owner]

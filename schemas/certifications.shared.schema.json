@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "certifications (shared)",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "issuer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "logo": {
+            "type": "string",
+            "pattern": "^images\\/.+\\.(jpe?g|png|webp|avif|svg)$"
+          },
+          "issue_date": {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$"
+          },
+          "expiry_date": {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$"
+          },
+          "credential_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "credential_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "fundamentals",
+              "associate",
+              "professional",
+              "expert",
+              "specialty"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "issuer",
+          "logo",
+          "issue_date",
+          "credential_id",
+          "skills"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+---
+import { t, type LocaleCode } from '@/i18n';
+import type { Portfolio } from '@/utils/content';
+import Section from './Section.astro';
+
+interface Props {
+  locale: LocaleCode;
+  groups: Portfolio['skills'];
+}
+const { locale, groups } = Astro.props;
+---
+
+<Section id="skills" title={t(locale, 'section.skills.title')} intro={t(locale, 'section.skills.intro')}>
+  <div class="grid gap-8 sm:grid-cols-2">
+    {
+      groups.map((group) => (
+        <div>
+          <h3 class="mb-3 text-xl">{group.title}</h3>
+          <ul class="flex flex-wrap gap-2" role="list">
+            {group.skills.map((skill) => <li class="chip chip-mono">{skill}</li>)}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

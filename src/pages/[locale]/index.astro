@@ -1,0 +1,13 @@
+---
+// Home page for every non-default locale, e.g. /en/. Empty while only one locale exists.
+import HomePage from '@/components/HomePage.astro';
+import { defaultLocale, localeCodes, type LocaleCode } from '@/i18n';
+
+export function getStaticPaths() {
+  return localeCodes.filter((code) => code !== defaultLocale).map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as LocaleCode;
+---
+
+<HomePage locale={locale} />
