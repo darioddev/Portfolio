@@ -37,7 +37,7 @@ const brand = `${data.profile.first_name} ${data.profile.last_name}`;
       enabled.map((id) => {
         switch (id) {
           case 'about':
-            return <Hero locale={locale} profile={data.profile} tagLabel={data.tagLabel} contactId={enabled.includes('contact') ? 'contact' : undefined} />;
+            return <Hero locale={locale} profile={data.profile} tagLabel={data.tagLabel} contactId={enabled.includes('contact') ? 'contact' : undefined} fullUrl={data.fullUrl} />;
           case 'experience':
             return <Experience locale={locale} items={data.experience} tagLabel={data.tagLabel} />;
           case 'education':
@@ -55,7 +55,7 @@ const brand = `${data.profile.first_name} ${data.profile.last_name}`;
         }
       })
     }
-    <CvDownload locale={locale} href={data.profile.cv} />
+    <CvDownload locale={locale} href={data.fullUrl(data.profile.cv)} />
   </main>
   <Footer locale={locale} name={brand} />
 </BaseLayout>

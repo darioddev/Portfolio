@@ -8,9 +8,10 @@ interface Props {
   locale: LocaleCode;
   profile: Portfolio['profile'];
   tagLabel: Portfolio['tagLabel'];
+  fullUrl: Portfolio['fullUrl'];
   contactId?: string | undefined;
 }
-const { locale, profile, tagLabel, contactId } = Astro.props;
+const { locale, profile, tagLabel, fullUrl, contactId } = Astro.props;
 const photo = resolveImage(profile.photo);
 const status = { open: 'var(--accent)', limited: 'var(--warn)', closed: 'var(--soft)' }[profile.availability];
 ---
@@ -45,7 +46,7 @@ const status = { open: 'var(--accent)', limited: 'var(--warn)', closed: 'var(--s
             </a>
           )
         }
-        <a class="btn btn-ghost" href={profile.cv} download>
+        <a class="btn btn-ghost" href={fullUrl(profile.cv)} download>
           {t(locale, 'cv.download')}
           <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path></svg>
         </a>

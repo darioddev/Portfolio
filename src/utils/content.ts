@@ -60,6 +60,7 @@ export async function getPortfolio(locale: LocaleCode) {
     site: { ...siteShared, ...siteText },
     // "tags" exists in both layers: keep the ids here, labels come from tagLabel().
     profile: { ...profileShared, ...profileText, tags: profileShared.tags, cv },
+    fullUrl: (path: string) => `${siteShared.seo.site_url}${siteShared.seo.base_path}${path}`,
     tagLabel: (id: string) => tagLabels.get(id) ?? id,
     experience: newestFirst(experience),
     education: newestFirst(education),
@@ -67,6 +68,8 @@ export async function getPortfolio(locale: LocaleCode) {
     skills,
     projects: [...projects].sort((a, b) => b.date.localeCompare(a.date))
   };
+
 }
+
 
 export type Portfolio = Awaited<ReturnType<typeof getPortfolio>>;
