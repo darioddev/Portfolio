@@ -163,9 +163,3 @@ Este proyecto asume que la IA escribe gran parte del código, por lo que los con
 - **Verificación automática:** lint, tipos y build en cada PR.
 - **Revisión humana:** nada llega a `master` sin PR y checks en verde.
 - **Control de costes:** prompts concretos y cambios acotados; el pipeline evita ejecuciones innecesarias.
-
----
-
-## Licencia
-
-Indica aquí la licencia del proyecto (por ejemplo, MIT).
