@@ -115,6 +115,7 @@ export const siteShared = z
     seo: z
       .object({
         site_url: url,
+        base_path: z.string().regex(/^\/[^\s]*$/, 'Use a path starting with "/"'),
         og_image: publicPath.optional().nullable(),
         twitter_handle: z.string().regex(/^@\w+$/).optional(),
       })

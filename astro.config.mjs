@@ -8,6 +8,7 @@ import { discoverLocaleCodes } from './src/i18n/discover.mjs';
 
 // The canonical site URL is defined once, in src/data/shared/site.yaml.
 const site = load(readFileSync('./src/data/shared/site.yaml', 'utf8')).seo.site_url;
+const basePath = load(readFileSync('./src/data/shared/site.yaml', 'utf8')).seo.base_path;
 
 // Locales are discovered from src/i18n/locales/*.properties, so adding a
 // language never requires touching this file.
@@ -15,6 +16,7 @@ const localeCodes = discoverLocaleCodes();
 
 export default defineConfig({
   site,
+  base: basePath,
   output: 'static',
   trailingSlash: 'ignore',
   build: { format: 'directory' },
