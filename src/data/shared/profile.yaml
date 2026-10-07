@@ -6,7 +6,7 @@ photo: images/profile/photo.jpeg   # file lives in src/assets/images/profile/
 availability: closed          # open | limited | closed
 cv:
   es: /cv/cv-es.pdf         # one entry per locale; missing locales fall back to the default
-tags: [cloud, apis, architecture, azure, integration, middleware]
+tags: [cloud, apis, architecture, azure, integration, middleware, support]
 links:
   - id: github
     kind: github

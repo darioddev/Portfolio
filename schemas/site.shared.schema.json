@@ -29,7 +29,8 @@
         },
         "og_image": {
           "type": "string",
-          "pattern": "^\\/[^\\s]+$"
+          "pattern": "^\\/[^\\s]+$",
+          "nullable": true
         },
         "twitter_handle": {
           "type": "string",

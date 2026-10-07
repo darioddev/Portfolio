@@ -117,7 +117,7 @@ export const siteShared = z
     seo: z
       .object({
         site_url: url,
-        og_image: publicPath,
+        og_image: publicPath.optional().nullable(),
         twitter_handle: z.string().regex(/^@\w+$/).optional(),
       })
       .strict(),

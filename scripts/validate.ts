@@ -61,8 +61,8 @@ function parseWith(path: string, schema: ZodTypeAny): unknown {
 const idsOf = (data: unknown): string[] =>
   ((data as { items?: { id: string }[] } | undefined)?.items ?? []).map((item) => item.id);
 
-const imageExists = (path: string) => existsSync(join(root, 'src/assets', path));
-const publicExists = (path: string) => existsSync(join(root, 'public', path));
+const imageExists = (path: string) => existsSync(join(root, 'src/assets', (path === undefined ? '' : path)));
+const publicExists = (path: string) => existsSync(join(root, 'public', (path === undefined ? '' : path)));
 
 /* locales --------------------------------------------------------------- */
 

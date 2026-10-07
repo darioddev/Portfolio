@@ -3,7 +3,6 @@ theme:
   default: system           # system | light | dark
 seo:
   site_url: https://darioddev.github.io
-  og_image: /images/og-default.png
   #twitter_handle: "@noreply"
 # Order and visibility of sections. The first enabled section must be "about".
 sections:
