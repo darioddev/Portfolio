@@ -1,0 +1,170 @@
+---
+import { t, type LocaleCode, type TranslationKey } from '@/i18n';
+import LanguageMenu from './LanguageMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  locale: LocaleCode;
+  sections: string[];
+}
+const { locale, sections } = Astro.props;
+---
+
+<a class="sr-only-link btn fixed top-2 left-2 z-[80]" href="#main">{t(locale, 'a11y.skipToContent')}</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <div class="left"><ThemeToggle locale={locale} /></div>
+
+    <nav id="site-nav" class="panel" aria-label={t(locale, 'nav.label')} data-nav>
+      <ul>
+        {sections.map((id) => <li><a href={`#${id}`}>{t(locale, `nav.${id}` as TranslationKey)}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="right"><LanguageMenu locale={locale} /></div>
+
+    <button type="button" class="burger" aria-expanded="false" aria-controls="site-nav" aria-label={t(locale, 'nav.toggle')} data-nav-toggle>
+      <svg class="open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      <svg class="close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 0.6rem;
+  }
+  .left {
+    order: 1;
+  }
+  .right {
+    order: 2;
+    margin-left: auto;
+  }
+  .burger {
+    order: 3;
+    display: none;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  :global(.js) .burger {
+    display: grid;
+  }
+  .burger .close,
+  .burger[aria-expanded='true'] .open {
+    display: none;
+  }
+  .burger[aria-expanded='true'] .close {
+    display: block;
+  }
+  .panel {
+    order: 4;
+    width: 100%;
+  }
+  .panel ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    padding-block: 0.25rem;
+  }
+  .panel a {
+    display: block;
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+    color: var(--soft);
+    text-decoration: none;
+  }
+  .panel a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.35em;
+  }
+
+  /* Phones: sections live behind the hamburger button. */
+  :global(.js) .panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    padding: 0.5rem 1.25rem 1rem;
+  }
+  :global(.js) .panel[data-open] {
+    display: block;
+  }
+  :global(.js) .panel ul {
+    flex-direction: column;
+    gap: 0;
+  }
+  :global(.js) .panel a {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  /* Desktop: toggle left, navigation centered, language right. */
+  @media (min-width: 768px) {
+    .bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+    }
+    .left {
+      justify-self: start;
+    }
+    .right {
+      justify-self: end;
+    }
+    .burger,
+    :global(.js) .burger {
+      display: none;
+    }
+    .panel,
+    :global(.js) .panel {
+      display: block;
+      position: static;
+      order: 0;
+      width: auto;
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+    .panel {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    :global(.js) .panel ul {
+      flex-direction: row;
+      gap: 0.25rem 1.25rem;
+    }
+    :global(.js) .panel a {
+      padding: 0.35rem 0;
+      border: 0;
+      font-size: 0.95rem;
+      color: var(--soft);
+    }
+    :global(.js) .panel a:hover {
+      color: var(--ink);
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../../schemas/site.shared.schema.json
+theme:
+  default: system           # system | light | dark
+seo:
+  site_url: https://darioddev.github.io
+  og_image: /images/og-default.png
+  #twitter_handle: "@noreply"
+# Order and visibility of sections. The first enabled section must be "about".
+sections:
+  - { id: about, enabled: true }
+  - { id: experience, enabled: true }
+  - { id: education, enabled: true }
+  - { id: certifications, enabled: true }
+  - { id: skills, enabled: true }
+  - { id: projects, enabled: false }
+  - { id: architecture, enabled: false }
+  - { id: notes, enabled: false }
+  - { id: testimonials, enabled: false }
+  - { id: contact, enabled: true }

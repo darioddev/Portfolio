@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../../schemas/experience.text.schema.json
+items:
+  - id: api-developer
+    position: API Developer
+    location: Madrid, España
+    summary: Gobernanza de APIs y constuir flujos de integraciones entre sistemas internos y externos.
+    responsibilities:
+      - Gobernar el ciclo de vida de las APIs desde su diseño, implementación y test.
+      - Construir flujos de integración entre sistemas internos y externos.
+    achievements: []
+  - id: intern-developer
+    position: Becario de desarrollo
+    location: Madrid, España
+    summary: Desarrollo en pequeños herramientas internas del departamento y análisis de herramientas.
+    responsibilities:
+      - Realizar pequeños desarrollos internos para el departamento.
+      - Analizar herramientas como AsyncAPI para su uso y gobernanza.
+    achievements: []
+  - id: intern-it
+    position: Becario de Sistemas Microinformáticos
+    location: Getafe , Madrid, España
+    summary: Matenimiento y maquetación de los equipos de la empresa.
+    responsibilities:
+      - Mantenimiento de los equipos de la empresa.
+      - Maquetación de los equipos de la empresa.
+    achievements: []

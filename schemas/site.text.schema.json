@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "site (text)",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "og_image_alt": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "og_image_alt"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../schemas/certifications.shared.schema.json
+items:
+  - id: api-addicts-mcp-owner
+    name: "API Addicts: MCP Owner"
+    issuer: API Addicts
+    logo: images/logos/certifications.svg
+    issue_date: 2026-08
+    expiry_date: 2028-08
+    credential_id: a021766f-5142-4d93-a66e-05080197afaf
+    credential_url: https://certidev.io//verify/a021766f-5142-4d93-a66e-05080197afaf
+    skills: [IA, MCP Owner, Design, Security]
+    level: specialty
+  - id: azure-fundamentals
+    name: "Microsoft Certified: Azure Fundamentals"
+    issuer: Microsoft
+    logo: images/logos/certifications.svg
+    issue_date: 2025-08
+    expiry_date: 2026-08
+    credential_id: 208EB0CD9FEACA00
+    skills: [Azure, Cloud Concepts, Security, Compliance]
+    level: fundamentals

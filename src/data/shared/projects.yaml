@@ -1,0 +1,3 @@
+# yaml-language-server: $schema=../../../schemas/projects.shared.schema.json
+# kind: "project" renders in Proyectos, "architecture" in Casos de arquitectura.
+items: []

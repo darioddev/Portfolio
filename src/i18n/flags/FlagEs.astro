@@ -1,0 +1,19 @@
+---
+// Spain. Decorative: the language name is always rendered next to the flag.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 16"
+  width="24"
+  height="16"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect width="24" height="16" fill="#AA151B"></rect>
+  <rect y="4" width="24" height="8" fill="#F1BF00"></rect>
+</svg>

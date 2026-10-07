@@ -1,0 +1,91 @@
+---
+import { localeUrl, locales, t, type LocaleCode } from '@/i18n';
+interface Props {
+  locale: LocaleCode;
+}
+const { locale } = Astro.props;
+const Current = locales[locale].flag;
+const options = Object.values(locales);
+---
+
+<details class="lang" data-lang-menu>
+  <summary aria-label={t(locale, 'language.menu.label')}>
+    <Current />
+    <span class="font-mono text-xs uppercase">{locale}</span>
+    <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"></path></svg>
+  </summary>
+  <ul>
+    {
+      options.map((option) => {
+        const Flag = option.flag;
+        return (
+          <li>
+            <a
+              href={localeUrl(option.code as LocaleCode)}
+              hreflang={option.code}
+              lang={option.code}
+              data-locale={option.code}
+              aria-current={option.code === locale ? 'true' : undefined}
+            >
+              <Flag />
+              {option.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</details>
+
+<style>
+  .lang {
+    position: relative;
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    cursor: pointer;
+    list-style: none;
+  }
+  summary:hover {
+    border-color: var(--accent);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  ul {
+    position: absolute;
+    right: 0;
+    z-index: 70;
+    margin-top: 0.35rem;
+    min-width: 11rem;
+    padding: 0.25rem;
+    list-style: none;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  a:hover,
+  a[aria-current='true'] {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  svg:first-child {
+    width: 1.3rem;
+    height: auto;
+    border-radius: 2px;
+  }
+</style>

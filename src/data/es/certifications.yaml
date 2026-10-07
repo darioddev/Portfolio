@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../../schemas/certifications.text.schema.json
+items:
+  - id: api-addicts-mcp-owner
+    description: Conceptos de arquitectura , diseño y seguridad de MCPs.
+  - id: azure-fundamentals
+    description: Aprendizaje de los conceptos básicos de la nube y los servicios de Azure.

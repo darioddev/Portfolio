@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import { t, type LocaleCode, type TranslationKey } from '@/i18n';
+import type { Portfolio } from '@/utils/content';
+import { formatDate } from '@/utils/dates';
+import { resolveImage } from '@/utils/images';
+import Section from './Section.astro';
+
+interface Props {
+  locale: LocaleCode;
+  items: Portfolio['certifications'];
+}
+const { locale, items } = Astro.props;
+---
+
+<Section id="certifications" title={t(locale, 'section.certifications.title')} intro={t(locale, 'section.certifications.intro')}>
+  <ul class="grid gap-5 md:grid-cols-2" role="list">
+    {
+      items.map((cert) => (
+        <li class="card flex flex-col gap-3 p-5">
+          <div class="flex items-start gap-3">
+            <Image src={resolveImage(cert.logo)} alt="" width={48} height={48} class="h-12 w-12 flex-none rounded-lg" />
+            <div>
+              <h3 class="text-lg leading-snug">{cert.name}</h3>
+              <p class="text-soft">
+                {cert.issuer}
+                {cert.level && <> · {t(locale, `certifications.level.${cert.level}` as TranslationKey)}</>}
+              </p>
+            </div>
+          </div>
+          <p class="text-sm">{cert.description}</p>
+          <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+            <dt class="text-soft">{t(locale, 'certifications.issued')}</dt>
+            <dd><time datetime={cert.issue_date}>{formatDate(locale, cert.issue_date)}</time></dd>
+            {cert.expiry_date && (
+              <>
+                <dt class="text-soft">{t(locale, 'certifications.expires')}</dt>
+                <dd><time datetime={cert.expiry_date}>{formatDate(locale, cert.expiry_date)}</time></dd>
+              </>
+            )}
+            <dt class="text-soft">{t(locale, 'certifications.credentialId')}</dt>
+            <dd class="font-mono text-xs">{cert.credential_id}</dd>
+          </dl>
+          {cert.skills.length > 0 && (
+            <ul class="flex flex-wrap gap-2" role="list" aria-label={t(locale, 'certifications.skills')}>
+              {cert.skills.map((skill) => <li class="chip">{skill}</li>)}
+            </ul>
+          )}
+          {cert.credential_url?.trim() && (
+            <a class="link mt-auto text-sm font-semibold" href={cert.credential_url} target="_blank" rel="noopener noreferrer">
+              {t(locale, 'certifications.verify')}
+              <span class="sr-only">{t(locale, 'a11y.externalLink')}</span>
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Section>

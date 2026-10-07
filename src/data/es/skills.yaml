@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../../schemas/skills.text.schema.json
+items:
+  - { id: azure, title: Azure }
+  - { id: apis, title: APIs }
+  - { id: middleware, title: Middleware e integración }
+  - { id: engineering, title: Ingeniería }
+  - { id: cloud, title: Cloud}
+  - { id: ia, title: Inteligencia artificial }

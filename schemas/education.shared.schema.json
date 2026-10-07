@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "education (shared)",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "institution": {
+            "type": "string",
+            "minLength": 1
+          },
+          "logo": {
+            "type": "string",
+            "pattern": "^images\\/.+\\.(jpe?g|png|webp|avif|svg)$"
+          },
+          "start_date": {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$"
+          },
+          "end_date": {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$"
+          },
+          "current": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "id",
+          "institution",
+          "logo",
+          "start_date"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

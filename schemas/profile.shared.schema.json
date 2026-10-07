@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "profile (shared)",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "photo": {
+      "type": "string",
+      "pattern": "^images\\/.+\\.(jpe?g|png|webp|avif|svg)$"
+    },
+    "cv": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^\\/[^\\s]+$"
+      }
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "open",
+        "limited",
+        "closed"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 1
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "github",
+              "linkedin",
+              "azure",
+              "x",
+              "website",
+              "other"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "label",
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email",
+    "photo",
+    "cv",
+    "availability",
+    "tags",
+    "links"
+  ],
+  "additionalProperties": false
+}

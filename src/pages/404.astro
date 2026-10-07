@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { defaultLocale, localeCodes, localeUrl, t } from '@/i18n';
+
+const routes = Object.fromEntries(localeCodes.map((code) => [code, localeUrl(code)]));
+const home = localeUrl(defaultLocale);
+---
+
+<BaseLayout locale={defaultLocale} title={t(defaultLocale, 'notFound.title')} description={t(defaultLocale, 'notFound.redirecting')} noindex>
+  <noscript slot="head"><meta http-equiv="refresh" content={`0;url=${home}`} /></noscript>
+  <main id="main" class="wrap py-24">
+    <h1 class="text-4xl">{t(defaultLocale, 'notFound.title')}</h1>
+    <p class="mt-4 text-soft">{t(defaultLocale, 'notFound.redirecting')}</p>
+    <a class="link mt-6 inline-block" href={home}>{t(defaultLocale, 'notFound.link')}</a>
+  </main>
+  <script is:inline define:vars={{ routes, defaultLocale }}>
+    // Send visitors to the home page of the language in the URL, their saved language, or the default one.
+    (function () {
+      var target = routes[defaultLocale];
+      try {
+        var prefix = location.pathname.split('/')[1];
+        var saved = localStorage.getItem('locale');
+        if (routes[prefix]) target = routes[prefix];
+        else if (saved && routes[saved]) target = routes[saved];
+      } catch (error) {
+        /* keep the default */
+      }
+      location.replace(target);
+    })();
+  </script>
+</BaseLayout>
