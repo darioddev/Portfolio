@@ -16,3 +16,4 @@ tags:
   - { id: azure, label: Azure }
   - { id: integration, label: Integraciones }
   - { id: middleware, label: Middleware }
+  - { id: support, label: Soporte }
